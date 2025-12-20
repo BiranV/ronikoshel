@@ -1,0 +1,41 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #1f6fae; /* Match header color for PWA overscroll/status bar */
+}
+
+/* Accessibility Classes */
+.access-grayscale {
+  filter: grayscale(100%) !important;
+}
+
+.access-high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+.access-high-contrast * {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  box-shadow: none !important;
+}
+.access-high-contrast img, 
+.access-high-contrast svg {
+  filter: grayscale(100%) contrast(200%);
+}
+
+.access-highlight-links a {
+  text-decoration: underline !important;
+  background-color: yellow !important;
+  color: black !important;
+}
+.access-highlight-links button {
+  outline: 2px solid yellow !important;
+}
+
+.access-large-font {
+  font-size: 120% !important;
+}
+.access-large-font * {
+  font-size: 110% !important;
+}
