@@ -116,6 +116,13 @@ export default function App() {
     // Send notification email on app load
     const sendVisitNotification = async () => {
       try {
+        // Skip if in development mode or localhost
+        if (
+          import.meta.env.DEV ||
+          window.location.hostname.includes("localhost")
+        )
+          return;
+
         // Check if we already sent a notification in this session to avoid spam
         if (sessionStorage.getItem("visitNotificationSent")) return;
 
