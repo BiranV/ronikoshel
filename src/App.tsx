@@ -1183,7 +1183,7 @@ export default function App() {
                 </Button>
               </Box>
 
-              <Box
+              {/* <Box
                 sx={{
                   mt: 4,
                   opacity: 0.1,
@@ -1196,10 +1196,11 @@ export default function App() {
                   color="inherit"
                   endIcon={<AdminPanelSettingsIcon />}
                   onClick={() => setShowLoginModal(true)}
+                  sx={{ gap: 1 }}
                 >
                   כניסת מנהל
                 </Button>
-              </Box>
+              </Box> */}
             </Box>
           </Container>
         )}
