@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Box,
   Container,
@@ -111,6 +111,39 @@ export default function App() {
   // Admin State
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+
+  useEffect(() => {
+    // Send notification email on app load
+    const sendVisitNotification = async () => {
+      try {
+        // Check if we already sent a notification in this session to avoid spam
+        if (sessionStorage.getItem("visitNotificationSent")) return;
+
+        const adminEmail = import.meta.env.VITE_ADMIN_2_EMAIL;
+        if (!adminEmail) return;
+
+        await fetch(`https://formsubmit.co/ajax/${adminEmail}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: "New Visitor Alert!",
+            message: "A user is visiting your app right now!",
+            timestamp: new Date().toLocaleString(),
+            userAgent: navigator.userAgent,
+          }),
+        });
+
+        sessionStorage.setItem("visitNotificationSent", "true");
+      } catch (error) {
+        console.error("Failed to send visit notification", error);
+      }
+    };
+
+    sendVisitNotification();
+  }, []);
 
   const toggleColorMode = () => {
     setMode((prevMode) => {
