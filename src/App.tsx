@@ -723,174 +723,251 @@ export default function App() {
 
             {/* Tracks Section */}
             <Box id="tracks" sx={{ mb: { xs: 6, md: 12 } }}>
-              <Typography
-                variant="h3"
-                fontWeight={800}
-                align="center"
-                gutterBottom
-                sx={{
-                  mb: { xs: 4, md: 6 },
-                  fontSize: { xs: "2rem", md: "3rem" },
-                }}
-              >
-                המסלולים
-              </Typography>
-              <Stack
-                direction={{ xs: "column", md: "row" }}
-                spacing={4}
-                alignItems="stretch"
-              >
-                {/* Monthly Track */}
-                <Card
+              <Container maxWidth="lg">
+                <Typography
+                  variant="h3"
+                  fontWeight={800}
+                  align="center"
+                  gutterBottom
                   sx={{
-                    flex: 1,
-                    p: 4,
-                    bgcolor: "background.paper",
-                    borderRadius: 4,
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-                    transition: "transform 0.3s",
-                    "&:hover": { transform: "translateY(-10px)" },
+                    mb: { xs: 4, md: 6 },
+                    fontSize: { xs: "2rem", md: "3rem" },
                   }}
                 >
-                  <Typography
-                    variant="h4"
-                    fontWeight={700}
-                    gutterBottom
-                    color="primary"
-                  >
-                    מסלול חודשי
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    gutterBottom
-                    sx={{ color: "text.secondary" }}
-                  >
-                    מתחילים לאט
-                  </Typography>
-                  <Divider sx={{ my: 3 }} />
-                  <List>
-                    {[
-                      "תוכנית אימונים אישית מותאמת למטרות שלך",
-                      "תפריט תזונה מותאם אישית",
-                      "ליווי ותמיכה יומיומית בוואטסאפ",
-                      "שיחת עדכון שבועית למעקב והתאמות",
-                    ].map((text, index) => (
-                      <ListItem key={index} disableGutters sx={{ py: 1 }}>
-                        <ListItemText
-                          primary={text}
-                          primaryTypographyProps={{
-                            fontSize: "1.05rem",
-                            textAlign: "right",
-                          }}
-                        />
-                        <ListItemIcon sx={{ minWidth: 36 }}>
-                          <CheckCircleOutlineIcon sx={{ color: "#1f6fae" }} />
-                        </ListItemIcon>
-                      </ListItem>
-                    ))}
-                  </List>
-                  <Box
+                  המסלולים
+                </Typography>
+                <Stack
+                  direction={{ xs: "column", md: "row" }}
+                  alignItems="stretch"
+                >
+                  {/* Monthly Track */}
+                  <Card
                     sx={{
-                      mt: 4,
-                      p: 2,
-                      bgcolor: "rgba(31, 111, 174, 0.1)",
-                      borderRadius: 2,
-                      borderRight: "4px solid #1f6fae",
+                      flex: 1,
+                      p: 4,
+                      bgcolor: "background.paper",
+                      borderRadius: 4,
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                      transition: "transform 0.3s",
+                      "&:hover": { transform: "translateY(-10px)" },
+                      display: "flex",
+                      flexDirection: "column",
                     }}
                   >
-                    <Typography variant="body2">
-                      💡 מיועד למי שרוצה להתחיל תהליך קצר, להתנסות בליווי אישי
-                      ולקבל דחיפה ראשונית בדרך לשינוי
+                    <Typography
+                      variant="h4"
+                      fontWeight={700}
+                      gutterBottom
+                      color="primary"
+                    >
+                      מסלול חודשי
                     </Typography>
-                  </Box>
-                </Card>
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{ color: "text.secondary" }}
+                    >
+                      כניסה מסודרת לתהליך
+                    </Typography>
+                    <Divider sx={{ my: 3 }} />
+                    <List>
+                      {[
+                        "התאמה אישית ראשונית של תכנית אימונים",
+                        "התאמה בסיסית של תפריט תזונה לפי מטרה",
+                        "ליווי והכוונה במהלך החודש",
+                        "מענה לשאלות והבהרות כדי להתחיל נכון",
+                      ].map((text, index) => (
+                        <ListItem key={index} disableGutters sx={{ py: 1 }}>
+                          <ListItemText
+                            primary={text}
+                            primaryTypographyProps={{
+                              fontSize: "1.05rem",
+                              textAlign: "right",
+                            }}
+                          />
+                          <ListItemIcon sx={{ minWidth: 36 }}>
+                            <CheckCircleOutlineIcon sx={{ color: "#1f6fae" }} />
+                          </ListItemIcon>
+                        </ListItem>
+                      ))}
+                    </List>
+                    <Box
+                      sx={{
+                        mt: "auto",
+                        p: 2,
+                        bgcolor: "rgba(31, 111, 174, 0.1)",
+                        borderRadius: 2,
+                        borderRight: "4px solid #1f6fae",
+                      }}
+                    >
+                      <Typography variant="body2">
+                        💡 חודש ממוקד לבניית בסיס נכון: התאמת תזונה ואימונים,
+                        סדר ובהירות. מתאים למי שרוצה להתחיל נכון ולהבין אם
+                        הליווי מתאים לו.
+                      </Typography>
+                    </Box>
+                  </Card>
 
-                {/* 3 Months Track */}
-                <Card
-                  sx={{
-                    flex: 1,
-                    p: 4,
-                    bgcolor: "background.paper",
-                    borderRadius: 4,
-                    border: "2px solid #1f6fae",
-                    boxShadow: "0 10px 30px rgba(31, 111, 174, 0.15)",
-                    position: "relative",
-                    overflow: "visible",
-                    transition: "transform 0.3s",
-                    "&:hover": { transform: "translateY(-10px)" },
-                  }}
-                >
-                  <Box
+                  {/* 3 Months Track */}
+                  <Card
                     sx={{
-                      position: "absolute",
-                      top: -16,
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      bgcolor: "primary.main",
-                      color: "white",
-                      px: 3,
-                      py: 0.5,
-                      borderRadius: 50,
-                      fontWeight: 700,
-                      fontSize: "0.875rem",
-                      boxShadow: "0 4px 10px rgba(31, 111, 174, 0.4)",
+                      flex: 1,
+                      p: 4,
+                      bgcolor: "background.paper",
+                      borderRadius: 4,
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                      transition: "transform 0.3s",
+                      "&:hover": { transform: "translateY(-10px)" },
+                      display: "flex",
+                      flexDirection: "column",
                     }}
                   >
-                    מומלץ ביותר
-                  </Box>
-                  <Typography
-                    variant="h4"
-                    fontWeight={700}
-                    gutterBottom
-                    color="primary"
-                  >
-                    מסלול 3 חודשים
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    gutterBottom
-                    sx={{ color: "text.secondary" }}
-                  >
-                    שולטים במשחק
-                  </Typography>
-                  <Divider sx={{ my: 3 }} />
-                  <List>
-                    {[
-                      "תוכנית אימונים ותזונה מלאה ל־3 חודשים",
-                      "מעקב ותמיכה שוטפת בוואטסאפ",
-                      "שיחת עדכון שבועית קבועה",
-                      "עדכונים והתאמות בתוכנית לאורך כל התקופה",
-                    ].map((text, index) => (
-                      <ListItem key={index} disableGutters sx={{ py: 1 }}>
-                        <ListItemText
-                          primary={text}
-                          primaryTypographyProps={{
-                            fontSize: "1.05rem",
-                            textAlign: "right",
-                          }}
-                        />
-                        <ListItemIcon sx={{ minWidth: 36 }}>
-                          <CheckCircleOutlineIcon sx={{ color: "#1f6fae" }} />
-                        </ListItemIcon>
-                      </ListItem>
-                    ))}
-                  </List>
-                  <Box
-                    sx={{
-                      mt: 4,
-                      p: 2,
-                      bgcolor: "rgba(31, 111, 174, 0.1)",
-                      borderRadius: 2,
-                      borderRight: "4px solid #1f6fae",
-                    }}
-                  >
-                    <Typography variant="body2">
-                      💡 מתאים למי שמוכן להתחייב לתהליך משמעותי יותר, לבנות
-                      הרגלים יציבים ולראות תוצאות ברורות.
+                    <Typography
+                      variant="h4"
+                      fontWeight={700}
+                      gutterBottom
+                      color="primary"
+                    >
+                      מסלול 3 חודשים
                     </Typography>
-                  </Box>
-                </Card>
-              </Stack>
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{ color: "text.secondary" }}
+                    >
+                      תהליך קצר עם תוצאות מורגשות
+                    </Typography>
+                    <Divider sx={{ my: 3 }} />
+                    <List>
+                      {[
+                        "תכנית אימונים ותזונה מותאמת אישית ומתעדכנת לאורך התקופה",
+                        "ליווי צמוד ושוטף בוואטסאפ",
+                        "מעקב התקדמות וביצוע התאמות לפי תוצאות",
+                        "בניית שגרה, משמעת והרגלים נכונים",
+                        "שיפור ניכר במראה, בכוח ובביטחון העצמי",
+                      ].map((text, index) => (
+                        <ListItem key={index} disableGutters sx={{ py: 1 }}>
+                          <ListItemText
+                            primary={text}
+                            primaryTypographyProps={{
+                              fontSize: "1.05rem",
+                              textAlign: "right",
+                            }}
+                          />
+                          <ListItemIcon sx={{ minWidth: 36 }}>
+                            <CheckCircleOutlineIcon sx={{ color: "#1f6fae" }} />
+                          </ListItemIcon>
+                        </ListItem>
+                      ))}
+                    </List>
+                    <Box
+                      sx={{
+                        mt: "auto",
+                        p: 2,
+                        bgcolor: "rgba(31, 111, 174, 0.1)",
+                        borderRadius: 2,
+                        borderRight: "4px solid #1f6fae",
+                      }}
+                    >
+                      <Typography variant="body2">
+                        💡 3 חודשים של עבודה עקבית ומדויקת, עם ליווי צמוד ותכנון
+                        חכם. בחירה מצוינת למי שרוצה לראות שינוי אמיתי בזמן קצר.
+                      </Typography>
+                    </Box>
+                  </Card>
+
+                  {/* Half-Yearly Track */}
+                  <Card
+                    sx={{
+                      flex: 1,
+                      p: 4,
+                      bgcolor: "background.paper",
+                      borderRadius: 4,
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                      position: "relative",
+                      overflow: "visible",
+                      transition: "transform 0.3s",
+                      "&:hover": { transform: "translateY(-10px)" },
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: -16,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        bgcolor: "primary.main",
+                        color: "white",
+                        px: 3,
+                        py: 0.5,
+                        borderRadius: 50,
+                        fontWeight: 700,
+                        fontSize: "0.875rem",
+                        boxShadow: "0 4px 10px rgba(31, 111, 174, 0.4)",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      מסלול מומלץ
+                    </Box>
+                    <Typography
+                      variant="h4"
+                      fontWeight={700}
+                      gutterBottom
+                      color="primary"
+                    >
+                      מסלול חצי שנתי
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{ color: "text.secondary" }}
+                    >
+                      לא “זבנג וגמרנו” - תהליך שבונה תוצאות
+                    </Typography>
+                    <Divider sx={{ my: 3 }} />
+                    <List>
+                      {[
+                        "ליווי מקיף ומלא לאורך 6 חודשים",
+                        "התאמות מתקדמות לתזונה ולאימונים לפי שלבי ההתקדמות",
+                        "בניית הרגלים עמוקים ואורח חיים בריא",
+                        "מעקב רציף, שליטה מלאה בתהליך ולמידה עצמאית",
+                        "תוצאות יציבות שנשארות גם אחרי סיום הליווי",
+                        "מתאים למי שמחפש שינוי אמיתי ולא פתרון זמני",
+                      ].map((text, index) => (
+                        <ListItem key={index} disableGutters sx={{ py: 0.5 }}>
+                          <ListItemText
+                            primary={text}
+                            primaryTypographyProps={{
+                              fontSize: "1.05rem",
+                              textAlign: "right",
+                            }}
+                          />
+                          <ListItemIcon sx={{ minWidth: 36 }}>
+                            <CheckCircleOutlineIcon sx={{ color: "#1f6fae" }} />
+                          </ListItemIcon>
+                        </ListItem>
+                      ))}
+                    </List>
+                    <Box
+                      sx={{
+                        mt: "auto",
+                        p: 2,
+                        bgcolor: "rgba(31, 111, 174, 0.1)",
+                        borderRadius: 2,
+                        borderRight: "4px solid #1f6fae",
+                      }}
+                    >
+                      <Typography variant="body2">
+                        💡 6 חודשים של תהליך מדויק, הדרגתי ומקצועי לבניית גוף
+                        חזק, אסתטי והרגלים שנשארים לאורך זמן. בלי קיצורי דרך,
+                        בלי בלבול - רק תוצאות אמיתיות שמחזיקות.
+                      </Typography>
+                    </Box>
+                  </Card>
+                </Stack>
+              </Container>
             </Box>
 
             {/* Results Section */}
@@ -1223,7 +1300,7 @@ export default function App() {
                 </Button>
               </Box>
 
-              {/* <Box
+              <Box
                 sx={{
                   mt: 4,
                   opacity: 0.1,
@@ -1240,7 +1317,7 @@ export default function App() {
                 >
                   כניסת מנהל
                 </Button>
-              </Box> */}
+              </Box>
             </Box>
           </Container>
         )}
