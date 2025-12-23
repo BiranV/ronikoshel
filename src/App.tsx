@@ -130,6 +130,25 @@ export default function App() {
         const adminEmail = import.meta.env.VITE_ADMIN_2_EMAIL;
         if (!adminEmail) return;
 
+        // Get or create persistent Visitor ID
+        let visitorId = localStorage.getItem("visitorId");
+        if (!visitorId) {
+          visitorId =
+            typeof crypto !== "undefined" && crypto.randomUUID
+              ? crypto.randomUUID()
+              : Math.random().toString(36).substring(2) +
+                Date.now().toString(36);
+          localStorage.setItem("visitorId", visitorId);
+        }
+
+        // Track visit count
+        let visitCount = parseInt(localStorage.getItem("visitCount") || "0");
+        visitCount++;
+        localStorage.setItem("visitCount", visitCount.toString());
+
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+        const screenRes = `${window.screen.width}x${window.screen.height}`;
+
         await fetch(`https://formsubmit.co/ajax/${adminEmail}`, {
           method: "POST",
           headers: {
@@ -137,10 +156,21 @@ export default function App() {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            _subject: "New Visitor Alert!",
-            message: "A user is visiting your app right now!",
-            timestamp: new Date().toLocaleString(),
-            userAgent: navigator.userAgent,
+            _subject: `New Visitor Alert! (${
+              visitCount > 1 ? "Returning" : "New"
+            })`,
+            _template: "table",
+            "Visitor Status":
+              visitCount > 1 ? "Returning Visitor" : "New Visitor",
+            "Visit Count": visitCount,
+            "Visitor ID": visitorId,
+            Time: new Date().toLocaleString(),
+            "Device Type": isMobile ? "Mobile" : "Desktop",
+            "Screen Resolution": screenRes,
+            Language: navigator.language,
+            Platform: navigator.platform,
+            Referrer: document.referrer || "Direct/Bookmark",
+            "User Agent": navigator.userAgent,
           }),
         });
 
