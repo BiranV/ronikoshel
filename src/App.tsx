@@ -127,8 +127,12 @@ export default function App() {
         // Check if we already sent a notification in this session to avoid spam
         if (sessionStorage.getItem("visitNotificationSent")) return;
 
-        const adminEmail = import.meta.env.VITE_ADMIN_2_EMAIL;
-        if (!adminEmail) return;
+        const adminEmails = [
+          import.meta.env.VITE_ADMIN_1_EMAIL,
+          import.meta.env.VITE_ADMIN_2_EMAIL,
+        ].filter(Boolean);
+
+        if (adminEmails.length === 0) return;
 
         // Get or create persistent Visitor ID
         let visitorId = localStorage.getItem("visitorId");
@@ -149,30 +153,36 @@ export default function App() {
         const isMobile = /Mobi|Android/i.test(navigator.userAgent);
         const screenRes = `${window.screen.width}x${window.screen.height}`;
 
-        await fetch(`https://formsubmit.co/ajax/${adminEmail}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            _subject: `New Visitor Alert! (${
-              visitCount > 1 ? "Returning" : "New"
-            })`,
-            _template: "table",
-            "Visitor Status":
-              visitCount > 1 ? "Returning Visitor" : "New Visitor",
-            "Visit Count": visitCount,
-            "Visitor ID": visitorId,
-            Time: new Date().toLocaleString(),
-            "Device Type": isMobile ? "Mobile" : "Desktop",
-            "Screen Resolution": screenRes,
-            Language: navigator.language,
-            Platform: navigator.platform,
-            Referrer: document.referrer || "Direct/Bookmark",
-            "User Agent": navigator.userAgent,
-          }),
+        const emailBody = JSON.stringify({
+          _subject: `New Visitor Alert! (${
+            visitCount > 1 ? "Returning" : "New"
+          })`,
+          _template: "table",
+          "Visitor Status":
+            visitCount > 1 ? "Returning Visitor" : "New Visitor",
+          "Visit Count": visitCount,
+          "Visitor ID": visitorId,
+          Time: new Date().toLocaleString(),
+          "Device Type": isMobile ? "Mobile" : "Desktop",
+          "Screen Resolution": screenRes,
+          Language: navigator.language,
+          Platform: navigator.platform,
+          Referrer: document.referrer || "Direct/Bookmark",
+          "User Agent": navigator.userAgent,
         });
+
+        await Promise.all(
+          adminEmails.map((email) =>
+            fetch(`https://formsubmit.co/ajax/${email}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: emailBody,
+            })
+          )
+        );
 
         sessionStorage.setItem("visitNotificationSent", "true");
       } catch (error) {
