@@ -129,7 +129,7 @@ export default function App() {
 
         const adminEmails = [
           import.meta.env.VITE_ADMIN_1_EMAIL,
-          import.meta.env.VITE_ADMIN_2_EMAIL,
+          // import.meta.env.VITE_ADMIN_2_EMAIL,
         ].filter(Boolean);
 
         if (adminEmails.length === 0) return;
