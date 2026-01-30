@@ -554,7 +554,7 @@ export default function App() {
                   sx={{
                     width: "auto",
                     opacity: 0.9,
-                    height: 150,
+                    height: 100,
                     marginBottom: 3,
                   }}
                 />
