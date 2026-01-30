@@ -48,6 +48,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import logoImage from "./assets/header-logo.svg";
+import logoImageBlack from "./assets/logo.png";
 import AccessibilityWidget from "./components/AccessibilityWidget";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import LoginModal from "./components/Admin/LoginModal";
@@ -74,6 +75,15 @@ const meImages = [
   meBefore4,
   meAfter5,
 ];
+
+import result1 from "./assets/results/IMG_1316 (1).PNG";
+import result2 from "./assets/results/IMG_1323.JPG.jpeg";
+import result3 from "./assets/results/IMG_1325.JPG.jpeg";
+import result4 from "./assets/results/IMG_1326.JPG.jpeg";
+import result5 from "./assets/results/IMG_1327.JPG.jpeg";
+import result6 from "./assets/results/IMG_1329.JPG.jpeg";
+
+const resultImages = [result1, result2, result3, result4, result5, result6];
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -180,8 +190,8 @@ export default function App() {
                 Accept: "application/json",
               },
               body: emailBody,
-            })
-          )
+            }),
+          ),
         );
 
         sessionStorage.setItem("visitNotificationSent", "true");
@@ -247,7 +257,7 @@ export default function App() {
           borderRadius: 16,
         },
       }),
-    [mode]
+    [mode],
   );
 
   const handleDrawerToggle = () => {
@@ -302,7 +312,7 @@ export default function App() {
         {[
           { label: "קצת עלי", id: "about", icon: <PersonIcon /> },
           { label: "מסלולים", id: "tracks", icon: <FitnessCenterIcon /> },
-          // { label: "תוצאות", id: "results", icon: <EmojiEventsIcon /> },
+          { label: "תוצאות", id: "results", icon: <EmojiEventsIcon /> },
           { label: "צור קשר", id: "contact", icon: <ContactSupportIcon /> },
         ].map((item) => (
           <ListItem key={item.id} disablePadding>
@@ -451,7 +461,7 @@ export default function App() {
                   >
                     מסלולים
                   </Button>
-                  {/* <Button
+                  <Button
                     color="inherit"
                     onClick={() => scrollToSection("results")}
                     sx={{
@@ -460,7 +470,7 @@ export default function App() {
                     }}
                   >
                     תוצאות
-                  </Button> */}
+                  </Button>
                   <Button
                     color="inherit"
                     onClick={() => scrollToSection("contact")}
@@ -537,11 +547,22 @@ export default function App() {
                   {/* ברוך הבא לאתר שלי */}
                   רוני קושל
                 </Typography>
+                <Box
+                  component="img"
+                  src={logoImageBlack}
+                  alt="Roni Koshel"
+                  sx={{
+                    width: "auto",
+                    opacity: 0.9,
+                    height: 150,
+                    marginBottom: 3,
+                  }}
+                />
                 <Typography
                   variant="h5"
                   sx={{ mb: 3, color: "primary.main", fontWeight: 600 }}
                 >
-                  תזונה וכושר בהתאמה אישית • מגוון מסלולים • זמינות 24/7
+                  תזונה וכושר בהתאמה אישית • מענה רציף • ליווי מקצועי{" "}
                 </Typography>
 
                 <Box
@@ -776,6 +797,14 @@ export default function App() {
                   }}
                 >
                   המסלולים
+                </Typography>
+                <Typography
+                  variant="h6"
+                  align="center"
+                  color="text.secondary"
+                  sx={{ mb: { xs: 4, md: 8 }, maxWidth: 800, mx: "auto" }}
+                >
+                  חיילים נהנים מהנחה מיוחדת בכל המסלולים 🫡
                 </Typography>
                 <Stack
                   direction={{ xs: "column", md: "row" }}
@@ -1012,136 +1041,143 @@ export default function App() {
             </Box>
 
             {/* Results Section */}
-            {false && (
-              <Box id="results" sx={{ mb: { xs: 6, md: 12 } }}>
-                <Typography
-                  variant="h3"
-                  fontWeight={800}
-                  align="center"
-                  gutterBottom
-                  sx={{
-                    mb: { xs: 4, md: 6 },
-                    fontSize: { xs: "2rem", md: "3rem" },
-                  }}
-                >
-                  תוצאות
-                </Typography>
-                <Typography
-                  variant="h6"
-                  align="center"
-                  color="text.secondary"
-                  sx={{ mb: { xs: 4, md: 8 }, maxWidth: 800, mx: "auto" }}
-                >
-                  הנה טעימה קטנה מהשינויים המדהימים שהמתאמנים שלי עשו. בקרוב
-                  תמונות נוספות!
-                </Typography>
+            <Box id="results" sx={{ mb: { xs: 6, md: 12 } }}>
+              <Typography
+                variant="h3"
+                fontWeight={800}
+                align="center"
+                gutterBottom
+                sx={{
+                  mb: { xs: 4, md: 6 },
+                  fontSize: { xs: "2rem", md: "3rem" },
+                }}
+              >
+                מתאמנים מספרים
+              </Typography>
+              <Typography
+                variant="h6"
+                align="center"
+                color="text.secondary"
+                sx={{ mb: { xs: 4, md: 8 }, maxWidth: 800, mx: "auto" }}
+              >
+                ההודעות אמיתיות, בלי פילטרים – כך נראית ההתקדמות של מתאמנים
+                שעובדים נכון ומתמידים.
+              </Typography>
 
-                <Box
-                  sx={{
-                    "& .swiper": {
-                      pb: 6,
-                      px: 2, // Add some padding to container so arrows don't touch edges
+              <Box
+                sx={{
+                  "& .swiper": {
+                    pb: 6,
+                    px: 2, // Add some padding to container so arrows don't touch edges
+                  },
+                  "& .swiper-pagination-bullet": {
+                    bgcolor: "primary.main",
+                    opacity: 0.4,
+                    transition: "all 0.3s",
+                    "&.swiper-pagination-bullet-active": {
+                      opacity: 1,
+                      transform: "scale(1.2)",
                     },
-                    "& .swiper-pagination-bullet": {
-                      bgcolor: "primary.main",
-                      opacity: 0.4,
-                      transition: "all 0.3s",
-                      "&.swiper-pagination-bullet-active": {
-                        opacity: 1,
-                        transform: "scale(1.2)",
-                      },
+                  },
+                  "& .swiper-button-next, & .swiper-button-prev": {
+                    color: "primary.main",
+                    bgcolor: "transparent",
+                    transition: "all 0.3s ease",
+                    "--swiper-navigation-size": "32px",
+                    "&:after": {
+                      fontSize: "32px",
+                      fontWeight: 900,
                     },
-                    "& .swiper-button-next, & .swiper-button-prev": {
-                      color: "primary.main",
-                      bgcolor: "transparent",
-                      transition: "all 0.3s ease",
-                      "--swiper-navigation-size": "32px",
-                      "&:after": {
-                        fontSize: "32px",
-                        fontWeight: 900,
-                      },
-                      "&:hover": {
-                        color: "primary.dark",
-                        transform: "scale(1.2)",
-                      },
+                    "&:hover": {
+                      color: "primary.dark",
+                      transform: "scale(1.2)",
                     },
-                    "& .swiper-button-next": {
-                      right: { xs: 0, md: 10 }, // Closer to edge on mobile
+                  },
+                  "& .swiper-button-next": {
+                    right: { xs: 0, md: 10 }, // Closer to edge on mobile
+                  },
+                  "& .swiper-button-prev": {
+                    left: { xs: 0, md: 10 },
+                  },
+                }}
+              >
+                <Swiper
+                  modules={[Pagination, Navigation, Autoplay]}
+                  spaceBetween={20}
+                  slidesPerView={1}
+                  navigation
+                  pagination={{ clickable: true }}
+                  autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                  }}
+                  loop={true}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
                     },
-                    "& .swiper-button-prev": {
-                      left: { xs: 0, md: 10 },
+                    1024: {
+                      slidesPerView: 3,
                     },
                   }}
                 >
-                  <Swiper
-                    modules={[Pagination, Navigation, Autoplay]}
-                    spaceBetween={30}
-                    slidesPerView={1}
-                    navigation
-                    pagination={{ clickable: true }}
-                    autoplay={{
-                      delay: 3000,
-                      disableOnInteraction: false,
-                    }}
-                    breakpoints={{
-                      640: {
-                        slidesPerView: 2,
-                      },
-                      1024: {
-                        slidesPerView: 3,
-                      },
-                    }}
-                  >
-                    {[1, 2, 3, 4, 5, 6].map((item) => (
-                      <SwiperSlide key={item}>
-                        <Card
-                          sx={{
-                            height: "100%",
-                            display: "flex",
-                            flexDirection: "column",
-                            borderRadius: 2,
-                            overflow: "hidden",
-                            boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-                            transition: "all 0.3s ease-in-out",
-                            "&:hover": {
-                              transform: "translateY(-5px)",
-                              boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+                  {resultImages.map((img, index) => (
+                    <SwiperSlide key={index}>
+                      <Box
+                        onClick={() => setSelectedImage(img)}
+                        sx={{
+                          borderRadius: 2,
+                          overflow: "hidden",
+                          boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+                          height: 400,
+                          position: "relative",
+                          cursor: "pointer",
+                          transition: "transform 0.3s ease",
+                          "&:hover": {
+                            transform: "scale(1.02)",
+                            "& .zoom-overlay": {
+                              opacity: 1,
                             },
+                          },
+                        }}
+                      >
+                        <Box
+                          component="img"
+                          src={img}
+                          alt={`Trainee Result ${index + 1}`}
+                          sx={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            display: "block",
+                          }}
+                        />
+                        <Box
+                          className="zoom-overlay"
+                          sx={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            bgcolor: "rgba(0,0,0,0.3)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            opacity: 0,
+                            transition: "opacity 0.3s ease",
                           }}
                         >
-                          <Box
-                            sx={{
-                              pt: "100%", // 1:1 Aspect Ratio
-                              position: "relative",
-                              bgcolor: "action.hover",
-                              overflow: "hidden",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: "100%",
-                                height: "100%",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                color: "text.secondary",
-                                fontSize: "1.2rem",
-                                fontWeight: 600,
-                              }}
-                            >
-                              תמונה {item}
-                            </Box>
-                          </Box>
-                        </Card>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </Box>
+                          <ZoomInIcon
+                            sx={{ color: "white", fontSize: "3rem" }}
+                          />
+                        </Box>
+                      </Box>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </Box>
-            )}
+            </Box>
 
             {/* Contact Section */}
             <Box
