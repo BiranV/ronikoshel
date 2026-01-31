@@ -16,8 +16,6 @@ import {
   Fab,
   useScrollTrigger,
   Slide,
-  Avatar,
-  Grid,
   IconButton,
   Drawer,
   ListItemButton,
@@ -25,9 +23,6 @@ import {
   createTheme,
   CssBaseline,
   Dialog,
-  DialogContent,
-  Fade,
-  Backdrop,
   SvgIcon,
   TextField,
 } from "@mui/material";
