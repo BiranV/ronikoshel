@@ -47,8 +47,7 @@ import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import CloseIcon from "@mui/icons-material/Close";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import logoImage from "./assets/header-logo.svg";
-import logoImageBlack from "./assets/logo.png";
+import logoImage from "./assets/white.svg";
 import AccessibilityWidget from "./components/AccessibilityWidget";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import LoginModal from "./components/Admin/LoginModal";
@@ -122,6 +121,7 @@ export default function App() {
   // Admin State
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const logoFilter = mode === "light" ? "invert(1)" : "none";
 
   useEffect(() => {
     // Send notification email on app load
@@ -151,7 +151,7 @@ export default function App() {
             typeof crypto !== "undefined" && crypto.randomUUID
               ? crypto.randomUUID()
               : Math.random().toString(36).substring(2) +
-                Date.now().toString(36);
+              Date.now().toString(36);
           localStorage.setItem("visitorId", visitorId);
         }
 
@@ -164,9 +164,8 @@ export default function App() {
         const screenRes = `${window.screen.width}x${window.screen.height}`;
 
         const emailBody = JSON.stringify({
-          _subject: `New Visitor Alert! (${
-            visitCount > 1 ? "Returning" : "New"
-          })`,
+          _subject: `New Visitor Alert! (${visitCount > 1 ? "Returning" : "New"
+            })`,
           _template: "table",
           "Visitor Status":
             visitCount > 1 ? "Returning Visitor" : "New Visitor",
@@ -222,25 +221,25 @@ export default function App() {
           },
           ...(mode === "light"
             ? {
-                background: {
-                  default: "#f5f5f5",
-                  paper: "#ffffff",
-                },
-                text: {
-                  primary: "#333333",
-                  secondary: "#666666",
-                },
-              }
+              background: {
+                default: "#f5f5f5",
+                paper: "#ffffff",
+              },
+              text: {
+                primary: "#333333",
+                secondary: "#666666",
+              },
+            }
             : {
-                background: {
-                  default: "#121212",
-                  paper: "#1e1e1e",
-                },
-                text: {
-                  primary: "#ffffff",
-                  secondary: "#b0b0b0",
-                },
-              }),
+              background: {
+                default: "#121212",
+                paper: "#1e1e1e",
+              },
+              text: {
+                primary: "#ffffff",
+                secondary: "#b0b0b0",
+              },
+            }),
         },
         typography: {
           fontFamily: "Rubik, system-ui, sans-serif",
@@ -292,7 +291,7 @@ export default function App() {
             sx={{
               width: 40,
               height: 40,
-              filter: "brightness(0) invert(1)",
+              filter: "none",
             }}
           />
           <Box>
@@ -422,6 +421,7 @@ export default function App() {
                     width: { xs: 40, md: 50 },
                     height: { xs: 40, md: 50 },
                     display: { xs: "none", sm: "block" },
+                    filter: "none",
                   }}
                 />
                 <Typography
@@ -549,13 +549,14 @@ export default function App() {
                 </Typography>
                 <Box
                   component="img"
-                  src={logoImageBlack}
+                  src={logoImage}
                   alt="Roni Koshel"
                   sx={{
                     width: "auto",
                     opacity: 0.9,
                     height: 100,
                     marginBottom: 3,
+                    filter: logoFilter,
                   }}
                 />
                 <Typography
