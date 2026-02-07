@@ -4,6 +4,12 @@ html, body {
   background-color: #1f6fae; /* Match header color for PWA overscroll/status bar */
 }
 
+@media (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 /* Accessibility Classes */
 .access-grayscale {
   filter: grayscale(100%) !important;

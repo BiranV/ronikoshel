@@ -120,17 +120,32 @@ export default function App() {
   const logoFilter = mode === "light" ? "invert(1)" : "none";
 
   const [showSoldierPromo, setShowSoldierPromo] = useState(false);
+  const [dragStartX, setDragStartX] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!sessionStorage.getItem("soldierPromoShown")) {
-      const timer = setTimeout(() => {
-        setShowSoldierPromo(true);
-        sessionStorage.setItem("soldierPromoShown", "true");
-      }, 1200);
+    const t = setTimeout(() => {
+      setShowSoldierPromo(true);
+    }, 1500);
 
-      return () => clearTimeout(timer);
-    }
+    return () => clearTimeout(t);
   }, []);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setDragStartX(e.clientX);
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (dragStartX !== null) {
+      const delta = e.clientX - dragStartX;
+
+      // אם החליק ימינה יותר מ־60px → סגור
+      if (delta > 60) {
+        setShowSoldierPromo(false);
+      }
+    }
+
+    setDragStartX(null);
+  };
 
   useEffect(() => {
     // Send notification email on app load
@@ -636,7 +651,7 @@ export default function App() {
                             borderRadius: 2,
                             overflow: "hidden",
                             boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                            height: 400,
+                            height: { xs: 280, sm: 320, md: 400 },
                             position: "relative",
                             cursor: "pointer",
                             transition: "transform 0.3s ease",
@@ -819,6 +834,7 @@ export default function App() {
                 <Stack
                   direction={{ xs: "column", md: "row" }}
                   alignItems="stretch"
+                  spacing={{ xs: 3, md: 0 }}
                 >
                   {/* Monthly Track */}
                   <Card
@@ -1139,7 +1155,7 @@ export default function App() {
                           borderRadius: 2,
                           overflow: "hidden",
                           boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                          height: 400,
+                          height: { xs: 280, sm: 320, md: 400 },
                           position: "relative",
                           cursor: "pointer",
                           transition: "transform 0.3s ease",
@@ -1194,27 +1210,31 @@ export default function App() {
               id="contact"
               sx={{
                 textAlign: "center",
-                py: 4,
+                py: { xs: 3, md: 4 },
+                px: { xs: 2, md: 4 },
                 bgcolor: "background.paper",
                 borderRadius: 4,
                 boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                maxWidth: 640,
+                mx: "auto",
               }}
             >
               <Typography
                 variant="h3"
                 fontWeight={800}
                 gutterBottom
-                sx={{ fontSize: { xs: "2rem", md: "3rem" } }}
+                sx={{ fontSize: { xs: "1.6rem", md: "2.5rem" } }}
               >
                 מוכנים להתחיל?
               </Typography>
               <Typography
                 variant="h6"
                 sx={{
-                  mb: 4,
+                  mb: { xs: 3, md: 4 },
                   color: "text.secondary",
-                  maxWidth: "auto",
+                  maxWidth: 520,
                   mx: "auto",
+                  fontSize: { xs: "1rem", md: "1.1rem" },
                 }}
               >
                 אני כאן לכל שאלה או התייעצות. שלחו לי הודעה ונתחיל את המסע שלכם
@@ -1223,11 +1243,10 @@ export default function App() {
 
               <Stack
                 direction="row"
-                // spacing={2}
                 justifyContent="center"
                 alignItems="center"
-                sx={{ mt: 2 }}
-                gap={2}
+                sx={{ mt: { xs: 1, md: 2 } }}
+                gap={{ xs: 1.5, md: 2 }}
               >
                 <IconButton
                   component="a"
@@ -1237,8 +1256,8 @@ export default function App() {
                   sx={{
                     color: "#E1306C",
                     bgcolor: "rgba(225, 48, 108, 0.1)",
-                    width: 72,
-                    height: 72,
+                    width: { xs: 56, md: 72 },
+                    height: { xs: 56, md: 72 },
                     transition: "all 0.3s",
                     "&:hover": {
                       bgcolor: "rgba(225, 48, 108, 0.2)",
@@ -1246,7 +1265,7 @@ export default function App() {
                     },
                   }}
                 >
-                  <InstagramIcon sx={{ fontSize: 40 }} />
+                  <InstagramIcon sx={{ fontSize: { xs: 32, md: 40 } }} />
                 </IconButton>
 
                 <IconButton
@@ -1257,8 +1276,8 @@ export default function App() {
                   sx={{
                     color: "text.primary",
                     bgcolor: "rgba(0, 0, 0, 0.05)",
-                    width: 72,
-                    height: 72,
+                    width: { xs: 56, md: 72 },
+                    height: { xs: 56, md: 72 },
                     transition: "all 0.3s",
                     "&:hover": {
                       bgcolor: "rgba(0, 0, 0, 0.1)",
@@ -1266,7 +1285,7 @@ export default function App() {
                     },
                   }}
                 >
-                  <TikTokIcon sx={{ fontSize: 40 }} />
+                  <TikTokIcon sx={{ fontSize: { xs: 32, md: 40 } }} />
                 </IconButton>
 
                 <IconButton
@@ -1274,8 +1293,8 @@ export default function App() {
                   sx={{
                     color: "#25D366",
                     bgcolor: "rgba(37, 211, 102, 0.1)",
-                    width: 72,
-                    height: 72,
+                    width: { xs: 56, md: 72 },
+                    height: { xs: 56, md: 72 },
                     transition: "all 0.3s",
                     "&:hover": {
                       bgcolor: "rgba(37, 211, 102, 0.2)",
@@ -1283,7 +1302,7 @@ export default function App() {
                     },
                   }}
                 >
-                  <WhatsAppIcon sx={{ fontSize: 40 }} />
+                  <WhatsAppIcon sx={{ fontSize: { xs: 32, md: 40 } }} />
                 </IconButton>
               </Stack>
 
@@ -1293,7 +1312,7 @@ export default function App() {
                 method="POST"
                 sx={{
                   mt: 4,
-                  maxWidth: 350,
+                  maxWidth: { xs: 300, sm: 360 },
                   mx: "auto",
                   display: "flex",
                   flexDirection: "column",
@@ -1413,103 +1432,83 @@ export default function App() {
 
         {showSoldierPromo && (
           <Box
-            onClick={() => setShowSoldierPromo(false)}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
             sx={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 2000,
-              backdropFilter: "blur(8px)",
-              background: "rgba(0,0,0,0.4)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              animation: "fadeIn 0.4s ease",
 
-              "@keyframes fadeIn": {
-                from: { opacity: 0 },
-                to: { opacity: 1 },
+              position: "fixed",
+              top: "18vh",
+              right: 0,
+              zIndex: 3000,
+              cursor: "pointer",
+
+              width: 260,
+              borderRadius: "18px 0 0 18px",
+              px: 2,
+              py: 1.5,   // פחות padding לגובה קטן יותר
+              color: "white",
+
+              background:
+                "linear-gradient(135deg, #1f6fae 0%, #00bcd4 100%)",
+
+              boxShadow: "0 20px 50px rgba(0,0,0,0.35)",
+
+              transform: "translateX(0)",
+              animation: "slideIn 0.6s ease-out, pulseGlow 2.5s 0.6s infinite",
+
+              "@keyframes slideIn": {
+                from: {
+                  opacity: 0,
+                  transform: "translateX(100%)",
+                },
+                to: {
+                  opacity: 1,
+                  transform: "translateX(0)",
+                },
+              },
+
+              "@keyframes pulseGlow": {
+                "0%": { boxShadow: "0 0 0 0 rgba(0,188,212,0.4)" },
+                "70%": { boxShadow: "0 0 0 12px rgba(0,188,212,0)" },
+                "100%": { boxShadow: "0 0 0 0 rgba(0,188,212,0)" },
+              },
+
+              "&:hover": {
+                transform: "translateX(0) scale(1.02)",
               },
             }}
           >
-            <Box
-              onClick={(e) => e.stopPropagation()}
-              sx={{
-                width: 340,
-                borderRadius: "28px",
-                p: 4,
-                textAlign: "center",
-                color: "white",
-
-                background:
-                  "linear-gradient(135deg, #1f6fae 0%, #00bcd4 100%)",
-
-                boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
-
-                animation: "popupIn 0.5s cubic-bezier(.17,.67,.33,1.2)",
-
-                "@keyframes popupIn": {
-                  from: {
-                    opacity: 0,
-                    transform: "translateY(40px) scale(0.9)",
-                  },
-                  to: {
-                    opacity: 1,
-                    transform: "translateY(0) scale(1)",
-                  },
-                },
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: 42,
-                  mb: 1,
-                  animation: "float 3s ease-in-out infinite",
-                  "@keyframes float": {
-                    "0%": { transform: "translateY(0px)" },
-                    "50%": { transform: "translateY(-6px)" },
-                    "100%": { transform: "translateY(0px)" },
-                  },
-                }}
-              >
-                🪖
+            <Stack spacing={0.5}> {/* פחות רווח */}
+              <Typography variant="body1" fontWeight={700}>
+                חיילים? מגיעה לכם הנחה 🫡
               </Typography>
 
-              <Typography variant="h5" fontWeight={800} mb={1}>
-                הנחה לחיילים
-              </Typography>
-
-              <Typography sx={{ opacity: 0.9, mb: 3 }}>
-                חיילים וחיילות נהנים מהנחה מיוחדת
-                בכל המסלולים
+              <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                השאירו פרטים ונחזור אליכם.
               </Typography>
 
               <Button
                 variant="contained"
+                size="small"
                 onClick={() => {
-                  setShowSoldierPromo(false);
-                  setTimeout(() => scrollToSection("contact"), 200);
-                }}
-                sx={{
-                  borderRadius: 50,
-                  px: 4,
-                  py: 1.3,
+                  setShowSoldierPromo(false);   // סוגר מיד
+                  setTimeout(() => scrollToSection("contact"), 150);
+                }} sx={{
+                  bgcolor: "white",
+                  color: "primary.main",
                   fontWeight: 700,
-                  background: "white",
-                  color: "#1f6fae",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
-                  transition: "all 0.25s ease",
-
-                  "&:hover": {
-                    transform: "translateY(-2px) scale(1.04)",
-                    background: "#f5f5f5",
-                  },
+                  mt: 0.5,
+                  py: 0.3,   // כפתור נמוך יותר
+                  minHeight: 30,
                 }}
               >
-                דברו איתי עכשיו
+                לפרטים
               </Button>
-            </Box>
+            </Stack>
           </Box>
         )}
+
+
 
         {/* Footer */}
         <Box
