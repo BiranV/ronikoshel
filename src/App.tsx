@@ -122,14 +122,16 @@ export default function App() {
   const [showSoldierPromo, setShowSoldierPromo] = useState(false);
   const [dragStartX, setDragStartX] = useState<number | null>(null);
 
+
   useEffect(() => {
-    const t = setTimeout(() => {
-      setShowSoldierPromo(true);
-    }, 1500);
-
-    return () => clearTimeout(t);
+    if (!sessionStorage.getItem("soldierPromoShown")) {
+      const t = setTimeout(() => {
+        setShowSoldierPromo(true);
+        sessionStorage.setItem("soldierPromoShown", "true");
+      }, 900);
+      return () => clearTimeout(t);
+    }
   }, []);
-
   const handlePointerDown = (e: React.PointerEvent) => {
     setDragStartX(e.clientX);
   };
