@@ -134,18 +134,37 @@ export default function App() {
   }, []);
   const handlePointerDown = (e: React.PointerEvent) => {
     setDragStartX(e.clientX);
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {
+      // ignore capture errors
+    }
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
     if (dragStartX !== null) {
       const delta = e.clientX - dragStartX;
 
-      // אם החליק ימינה יותר מ־60px → סגור
-      if (delta > 60) {
+      // אם החליק ימינה יותר מ־40px → סגור
+      if (delta > 40) {
         setShowSoldierPromo(false);
       }
     }
 
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      // ignore release errors
+    }
+    setDragStartX(null);
+  };
+
+  const handlePointerCancel = (e: React.PointerEvent) => {
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      // ignore release errors
+    }
     setDragStartX(null);
   };
 
@@ -1436,6 +1455,7 @@ export default function App() {
           <Box
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
             sx={{
 
               position: "fixed",
