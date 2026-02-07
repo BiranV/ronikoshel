@@ -1502,7 +1502,7 @@ export default function App() {
           >
             <Stack spacing={0.5}> {/* פחות רווח */}
               <Typography variant="body1" fontWeight={700}>
-                חיילים? מגיעה לכם הנחה 🫡
+                חיילים/חיילות? מגיעה לכם הנחה 🫡
               </Typography>
 
               <Typography variant="body2" sx={{ opacity: 0.9 }}>
