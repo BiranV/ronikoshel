@@ -119,6 +119,19 @@ export default function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const logoFilter = mode === "light" ? "invert(1)" : "none";
 
+  const [showSoldierPromo, setShowSoldierPromo] = useState(false);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("soldierPromoShown")) {
+      const timer = setTimeout(() => {
+        setShowSoldierPromo(true);
+        sessionStorage.setItem("soldierPromoShown", "true");
+      }, 1200);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   useEffect(() => {
     // Send notification email on app load
     const sendVisitNotification = async () => {
@@ -1397,6 +1410,107 @@ export default function App() {
             </Box>
           </Container>
         )}
+
+        {showSoldierPromo && (
+          <Box
+            onClick={() => setShowSoldierPromo(false)}
+            sx={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 2000,
+              backdropFilter: "blur(8px)",
+              background: "rgba(0,0,0,0.4)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              animation: "fadeIn 0.4s ease",
+
+              "@keyframes fadeIn": {
+                from: { opacity: 0 },
+                to: { opacity: 1 },
+              },
+            }}
+          >
+            <Box
+              onClick={(e) => e.stopPropagation()}
+              sx={{
+                width: 340,
+                borderRadius: "28px",
+                p: 4,
+                textAlign: "center",
+                color: "white",
+
+                background:
+                  "linear-gradient(135deg, #1f6fae 0%, #00bcd4 100%)",
+
+                boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
+
+                animation: "popupIn 0.5s cubic-bezier(.17,.67,.33,1.2)",
+
+                "@keyframes popupIn": {
+                  from: {
+                    opacity: 0,
+                    transform: "translateY(40px) scale(0.9)",
+                  },
+                  to: {
+                    opacity: 1,
+                    transform: "translateY(0) scale(1)",
+                  },
+                },
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: 42,
+                  mb: 1,
+                  animation: "float 3s ease-in-out infinite",
+                  "@keyframes float": {
+                    "0%": { transform: "translateY(0px)" },
+                    "50%": { transform: "translateY(-6px)" },
+                    "100%": { transform: "translateY(0px)" },
+                  },
+                }}
+              >
+                🪖
+              </Typography>
+
+              <Typography variant="h5" fontWeight={800} mb={1}>
+                הנחה לחיילים
+              </Typography>
+
+              <Typography sx={{ opacity: 0.9, mb: 3 }}>
+                חיילים וחיילות נהנים מהנחה מיוחדת
+                בכל המסלולים
+              </Typography>
+
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setShowSoldierPromo(false);
+                  setTimeout(() => scrollToSection("contact"), 200);
+                }}
+                sx={{
+                  borderRadius: 50,
+                  px: 4,
+                  py: 1.3,
+                  fontWeight: 700,
+                  background: "white",
+                  color: "#1f6fae",
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+                  transition: "all 0.25s ease",
+
+                  "&:hover": {
+                    transform: "translateY(-2px) scale(1.04)",
+                    background: "#f5f5f5",
+                  },
+                }}
+              >
+                דברו איתי עכשיו
+              </Button>
+            </Box>
+          </Box>
+        )}
+
         {/* Footer */}
         <Box
           sx={{
