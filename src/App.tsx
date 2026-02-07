@@ -70,6 +70,7 @@ const meImages = [
   meAfter5,
 ];
 
+import result0 from "./assets/results/IMG_1226.JPG.jpeg";
 import result1 from "./assets/results/IMG_1316 (1).PNG";
 import result2 from "./assets/results/IMG_1323.JPG.jpeg";
 import result3 from "./assets/results/IMG_1325.JPG.jpeg";
@@ -77,7 +78,7 @@ import result4 from "./assets/results/IMG_1326.JPG.jpeg";
 import result5 from "./assets/results/IMG_1327.JPG.jpeg";
 import result6 from "./assets/results/IMG_1329.JPG.jpeg";
 
-const resultImages = [result1, result2, result3, result4, result5, result6];
+const resultImages = [result0, result1, result2, result3, result4, result5, result6];
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
