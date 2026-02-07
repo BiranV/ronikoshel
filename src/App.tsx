@@ -1486,7 +1486,7 @@ export default function App() {
               </Typography>
 
               <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                השאירו פרטים ונחזור אליכם.
+                השאירו פרטים ואחזור אליכם.
               </Typography>
 
               <Button
