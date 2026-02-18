@@ -124,7 +124,10 @@ export default function App() {
     return savedMode === "light" || savedMode === "dark" ? savedMode : "light";
   });
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [lightboxImages, setLightboxImages] = useState<string[]>([]);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null,
+  );
 
   // Admin State
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
@@ -133,6 +136,16 @@ export default function App() {
 
   const [showSoldierPromo, setShowSoldierPromo] = useState(false);
   const [dragStartX, setDragStartX] = useState<number | null>(null);
+
+  const openLightbox = (images: string[], index: number) => {
+    setLightboxImages(images);
+    setSelectedImageIndex(index);
+  };
+
+  const closeLightbox = () => {
+    setSelectedImageIndex(null);
+    setLightboxImages([]);
+  };
 
   useEffect(() => {
     if (!sessionStorage.getItem("soldierPromoShown")) {
@@ -678,7 +691,7 @@ export default function App() {
                     {meImages.map((img, index) => (
                       <SwiperSlide key={index}>
                         <Box
-                          onClick={() => setSelectedImage(img)}
+                          onClick={() => openLightbox(meImages, index)}
                           sx={{
                             borderRadius: 2,
                             overflow: "hidden",
@@ -734,8 +747,8 @@ export default function App() {
 
                 {/* Lightbox Dialog */}
                 <Dialog
-                  open={!!selectedImage}
-                  onClose={() => setSelectedImage(null)}
+                  open={selectedImageIndex !== null}
+                  onClose={closeLightbox}
                   maxWidth="lg"
                   fullWidth
                   PaperProps={{
@@ -755,7 +768,7 @@ export default function App() {
                     sx={{ position: "relative", width: "100%", height: "100%" }}
                   >
                     <IconButton
-                      onClick={() => setSelectedImage(null)}
+                      onClick={closeLightbox}
                       sx={{
                         position: "absolute",
                         top: 10,
@@ -768,18 +781,38 @@ export default function App() {
                     >
                       <CloseIcon />
                     </IconButton>
-                    <Box
-                      component="img"
-                      src={selectedImage || ""}
-                      alt="Full size"
-                      sx={{
-                        width: "100%",
-                        height: "auto",
-                        maxHeight: "90vh",
-                        objectFit: "contain",
-                        display: "block",
-                      }}
-                    />
+                    {selectedImageIndex !== null && (
+                      <Swiper
+                        key={`lightbox-${lightboxImages[0] || ""}-${selectedImageIndex}`}
+                        modules={[Pagination, Navigation]}
+                        initialSlide={selectedImageIndex}
+                        navigation
+                        pagination={{ clickable: true }}
+                        allowTouchMove={true}
+                        simulateTouch={true}
+                        style={{ width: "100%", height: "100%" }}
+                      >
+                        {lightboxImages.map((img, index) => (
+                          <SwiperSlide key={`${img}-${index}`}>
+                            <Box
+                              component="img"
+                              src={img}
+                              alt={`Full size ${index + 1}`}
+                              draggable={false}
+                              sx={{
+                                width: "100%",
+                                height: "auto",
+                                maxHeight: "90vh",
+                                objectFit: "contain",
+                                display: "block",
+                                userSelect: "none",
+                                WebkitUserDrag: "none",
+                              }}
+                            />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                    )}
                   </Box>
                 </Dialog>
 
@@ -1251,7 +1284,7 @@ export default function App() {
                   {resultImages.map((img, index) => (
                     <SwiperSlide key={index}>
                       <Box
-                        onClick={() => setSelectedImage(img)}
+                        onClick={() => openLightbox(resultImages, index)}
                         sx={{
                           borderRadius: 2,
                           overflow: "hidden",
