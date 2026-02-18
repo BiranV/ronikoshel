@@ -78,7 +78,15 @@ import result4 from "./assets/results/IMG_1326.JPG.jpeg";
 import result5 from "./assets/results/IMG_1327.JPG.jpeg";
 import result6 from "./assets/results/IMG_1329.JPG.jpeg";
 
-const resultImages = [result0, result1, result2, result3, result4, result5, result6];
+const resultImages = [
+  result0,
+  result1,
+  result2,
+  result3,
+  result4,
+  result5,
+  result6,
+];
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -121,7 +129,6 @@ export default function App() {
 
   const [showSoldierPromo, setShowSoldierPromo] = useState(false);
   const [dragStartX, setDragStartX] = useState<number | null>(null);
-
 
   useEffect(() => {
     if (!sessionStorage.getItem("soldierPromoShown")) {
@@ -196,7 +203,7 @@ export default function App() {
             typeof crypto !== "undefined" && crypto.randomUUID
               ? crypto.randomUUID()
               : Math.random().toString(36).substring(2) +
-              Date.now().toString(36);
+                Date.now().toString(36);
           localStorage.setItem("visitorId", visitorId);
         }
 
@@ -209,8 +216,9 @@ export default function App() {
         const screenRes = `${window.screen.width}x${window.screen.height}`;
 
         const emailBody = JSON.stringify({
-          _subject: `New Visitor Alert! (${visitCount > 1 ? "Returning" : "New"
-            })`,
+          _subject: `New Visitor Alert! (${
+            visitCount > 1 ? "Returning" : "New"
+          })`,
           _template: "table",
           "Visitor Status":
             visitCount > 1 ? "Returning Visitor" : "New Visitor",
@@ -266,25 +274,25 @@ export default function App() {
           },
           ...(mode === "light"
             ? {
-              background: {
-                default: "#f5f5f5",
-                paper: "#ffffff",
-              },
-              text: {
-                primary: "#333333",
-                secondary: "#666666",
-              },
-            }
+                background: {
+                  default: "#f5f5f5",
+                  paper: "#ffffff",
+                },
+                text: {
+                  primary: "#333333",
+                  secondary: "#666666",
+                },
+              }
             : {
-              background: {
-                default: "#121212",
-                paper: "#1e1e1e",
-              },
-              text: {
-                primary: "#ffffff",
-                secondary: "#b0b0b0",
-              },
-            }),
+                background: {
+                  default: "#121212",
+                  paper: "#1e1e1e",
+                },
+                text: {
+                  primary: "#ffffff",
+                  secondary: "#b0b0b0",
+                },
+              }),
         },
         typography: {
           fontFamily: "Rubik, system-ui, sans-serif",
@@ -1083,6 +1091,75 @@ export default function App() {
                       </Typography>
                     </Box>
                   </Card>
+
+                  {/* Yearly Track */}
+                  <Card
+                    sx={{
+                      flex: 1,
+                      p: 4,
+                      bgcolor: "background.paper",
+                      borderRadius: 4,
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                      transition: "transform 0.3s",
+                      "&:hover": { transform: "translateY(-10px)" },
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      fontWeight={700}
+                      gutterBottom
+                      color="primary"
+                    >
+                      מסלול שנתי VIP
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{ color: "text.secondary" }}
+                    >
+                      המהפך השלם – שינוי אורח חיים מקצה לקצה
+                    </Typography>
+                    <Divider sx={{ my: 3 }} />
+                    <List>
+                      {[
+                        "ליווי צמוד ומקיף למשך 12 חודשים",
+                        "בניית תוכנית שנתית לתוצאות מקסימליות",
+                        "הטמעת הרגלים עמוקה לשימור התוצאות לכל החיים",
+                        "מעטפת מלאה לכל סיטואציה – חופשות, אירועים ושגרה",
+                        "הגעה לגרסה הכי טובה של עצמך, פיזית ומנטלית",
+                      ].map((text, index) => (
+                        <ListItem key={index} disableGutters sx={{ py: 0.5 }}>
+                          <ListItemText
+                            primary={text}
+                            primaryTypographyProps={{
+                              fontSize: "1.05rem",
+                              textAlign: "right",
+                            }}
+                          />
+                          <ListItemIcon sx={{ minWidth: 36 }}>
+                            <CheckCircleOutlineIcon sx={{ color: "#1f6fae" }} />
+                          </ListItemIcon>
+                        </ListItem>
+                      ))}
+                    </List>
+                    <Box
+                      sx={{
+                        mt: "auto",
+                        p: 2,
+                        bgcolor: "rgba(31, 111, 174, 0.1)",
+                        borderRadius: 2,
+                        borderRight: "4px solid #1f6fae",
+                      }}
+                    >
+                      <Typography variant="body2">
+                        💡 שנה שלמה של עבודה משותפת, ירידה לפרטים הכי קטנים
+                        ובניית גוף חזק ובריא באמת. המסלול המקיף ביותר למי שרוצה
+                        שינוי טוטאלי ולא מתפשר על התוצאות.
+                      </Typography>
+                    </Box>
+                  </Card>
                 </Stack>
               </Container>
             </Box>
@@ -1450,14 +1527,12 @@ export default function App() {
             </Box>
           </Container>
         )}
-
         {showSoldierPromo && (
           <Box
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerCancel}
             sx={{
-
               position: "fixed",
               top: "18vh",
               right: 0,
@@ -1467,11 +1542,10 @@ export default function App() {
               width: 260,
               borderRadius: "18px 0 0 18px",
               px: 2,
-              py: 1.5,   // פחות padding לגובה קטן יותר
+              py: 1.5, // פחות padding לגובה קטן יותר
               color: "white",
 
-              background:
-                "linear-gradient(135deg, #1f6fae 0%, #00bcd4 100%)",
+              background: "linear-gradient(135deg, #1f6fae 0%, #00bcd4 100%)",
 
               boxShadow: "0 20px 50px rgba(0,0,0,0.35)",
 
@@ -1500,27 +1574,28 @@ export default function App() {
               },
             }}
           >
-            <Stack spacing={0.5}> {/* פחות רווח */}
+            <Stack spacing={0.5}>
+              {" "}
+              {/* פחות רווח */}
               <Typography variant="body1" fontWeight={700}>
                 חיילים/חיילות? מגיעה לכם הנחה 🫡
               </Typography>
-
               <Typography variant="body2" sx={{ opacity: 0.9 }}>
                 השאירו פרטים ואחזור אליכם.
               </Typography>
-
               <Button
                 variant="contained"
                 size="small"
                 onClick={() => {
-                  setShowSoldierPromo(false);   // סוגר מיד
+                  setShowSoldierPromo(false); // סוגר מיד
                   setTimeout(() => scrollToSection("contact"), 150);
-                }} sx={{
+                }}
+                sx={{
                   bgcolor: "white",
                   color: "primary.main",
                   fontWeight: 700,
                   mt: 0.5,
-                  py: 0.3,   // כפתור נמוך יותר
+                  py: 0.3, // כפתור נמוך יותר
                   minHeight: 30,
                 }}
               >
@@ -1529,9 +1604,6 @@ export default function App() {
             </Stack>
           </Box>
         )}
-
-
-
         {/* Footer */}
         <Box
           sx={{
