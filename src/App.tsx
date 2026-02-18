@@ -70,22 +70,26 @@ const meImages = [
   meAfter5,
 ];
 
-import result0 from "./assets/results/IMG_1226.JPG.jpeg";
-import result1 from "./assets/results/IMG_1316 (1).PNG";
-import result2 from "./assets/results/IMG_1323.JPG.jpeg";
-import result3 from "./assets/results/IMG_1325.JPG.jpeg";
-import result4 from "./assets/results/IMG_1326.JPG.jpeg";
-import result5 from "./assets/results/IMG_1327.JPG.jpeg";
-import result6 from "./assets/results/IMG_1329.JPG.jpeg";
+import result1 from "./assets/results/result_1.jpg";
+import result2 from "./assets/results/result_2.PNG";
+import result3 from "./assets/results/result_3.jpg";
+import result4 from "./assets/results/result_4.jpg";
+import result5 from "./assets/results/result_5.jpg";
+import result6 from "./assets/results/result_6.jpg";
+import result7 from "./assets/results/result_7.jpg";
+import result8 from "./assets/results/result_8.jpg";
+import result9 from "./assets/results/result_9.jpg";
 
 const resultImages = [
-  result0,
   result1,
   result2,
   result3,
   result4,
   result5,
   result6,
+  result7,
+  result8,
+  result9,
 ];
 
 // Swiper
