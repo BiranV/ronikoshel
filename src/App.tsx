@@ -105,8 +105,7 @@ const TikTokIcon = (props: any) => (
   </SvgIcon>
 );
 
-const WHATSAPP_NUMBER = "972509249858";
-const ADMIN_1_EMAIL = "ronikoshelfit@gmail.com";
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
 
 function HideOnScroll(props: { children: React.ReactElement }) {
   const { children } = props;
@@ -195,7 +194,7 @@ export default function App() {
         if (sessionStorage.getItem("visitNotificationSent")) return;
 
         const adminEmails = [
-          ADMIN_1_EMAIL,
+          import.meta.env.VITE_ADMIN_1_EMAIL,
           // import.meta.env.VITE_ADMIN_2_EMAIL,
         ].filter(Boolean);
 
@@ -208,7 +207,7 @@ export default function App() {
             typeof crypto !== "undefined" && crypto.randomUUID
               ? crypto.randomUUID()
               : Math.random().toString(36).substring(2) +
-                Date.now().toString(36);
+              Date.now().toString(36);
           localStorage.setItem("visitorId", visitorId);
         }
 
@@ -221,9 +220,8 @@ export default function App() {
         const screenRes = `${window.screen.width}x${window.screen.height}`;
 
         const emailBody = JSON.stringify({
-          _subject: `New Visitor Alert! (${
-            visitCount > 1 ? "Returning" : "New"
-          })`,
+          _subject: `New Visitor Alert! (${visitCount > 1 ? "Returning" : "New"
+            })`,
           _template: "table",
           "Visitor Status":
             visitCount > 1 ? "Returning Visitor" : "New Visitor",
@@ -279,25 +277,25 @@ export default function App() {
           },
           ...(mode === "light"
             ? {
-                background: {
-                  default: "#f5f5f5",
-                  paper: "#ffffff",
-                },
-                text: {
-                  primary: "#333333",
-                  secondary: "#666666",
-                },
-              }
+              background: {
+                default: "#f5f5f5",
+                paper: "#ffffff",
+              },
+              text: {
+                primary: "#333333",
+                secondary: "#666666",
+              },
+            }
             : {
-                background: {
-                  default: "#121212",
-                  paper: "#1e1e1e",
-                },
-                text: {
-                  primary: "#ffffff",
-                  secondary: "#b0b0b0",
-                },
-              }),
+              background: {
+                default: "#121212",
+                paper: "#1e1e1e",
+              },
+              text: {
+                primary: "#ffffff",
+                secondary: "#b0b0b0",
+              },
+            }),
         },
         typography: {
           fontFamily: "Rubik, system-ui, sans-serif",
