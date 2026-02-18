@@ -40,6 +40,8 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import CloseIcon from "@mui/icons-material/Close";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import logoImage from "./assets/white.svg";
@@ -639,10 +641,8 @@ export default function App() {
                   sx={{
                     mb: 4,
                     mx: "auto",
-                    "& .swiper": {
-                      pb: 6,
-                      px: 2,
-                    },
+                    position: "relative",
+                    "& .swiper": { pb: 6, px: { xs: 5, md: 7 } },
                     "& .swiper-pagination-bullet": {
                       bgcolor: "primary.main",
                       opacity: 0.4,
@@ -652,27 +652,46 @@ export default function App() {
                         transform: "scale(1.2)",
                       },
                     },
-                    "& .swiper-button-next, & .swiper-button-prev": {
-                      color: "primary.main",
-                      bgcolor: "transparent",
-                      transition: "all 0.3s ease",
-                      "--swiper-navigation-size": "32px",
-                      "&:after": {
-                        fontSize: "32px",
-                        fontWeight: 900,
-                      },
-                      "&:hover": {
-                        color: "primary.dark",
-                        transform: "scale(1.2)",
-                      },
-                    },
+                    "& .swiper-button-next, & .swiper-button-prev": { display: "none" },
                   }}
                 >
+                  <IconButton
+                    className="me-prev"
+                    sx={{
+                      position: "absolute", right: { xs: -4, md: -8 }, top: "42%",
+                      transform: "translateY(-50%)", zIndex: 10,
+                      bgcolor: "rgba(60,60,60,0.75)", color: "#fff",
+                      width: 44, height: 44,
+                      backdropFilter: "blur(4px)",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+                      border: "1.5px solid rgba(255,255,255,0.18)",
+                      transition: "all 0.2s",
+                      "&:hover": { bgcolor: "rgba(30,30,30,0.95)", transform: "translateY(-50%) scale(1.1)" },
+                    }}
+                  >
+                    <ChevronRightIcon sx={{ fontSize: 26 }} />
+                  </IconButton>
+                  <IconButton
+                    className="me-next"
+                    sx={{
+                      position: "absolute", left: { xs: -4, md: -8 }, top: "42%",
+                      transform: "translateY(-50%)", zIndex: 10,
+                      bgcolor: "rgba(60,60,60,0.75)", color: "#fff",
+                      width: 44, height: 44,
+                      backdropFilter: "blur(4px)",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+                      border: "1.5px solid rgba(255,255,255,0.18)",
+                      transition: "all 0.2s",
+                      "&:hover": { bgcolor: "rgba(30,30,30,0.95)", transform: "translateY(-50%) scale(1.1)" },
+                    }}
+                  >
+                    <ChevronLeftIcon sx={{ fontSize: 26 }} />
+                  </IconButton>
                   <Swiper
                     modules={[Pagination, Navigation, Autoplay]}
                     spaceBetween={20}
                     slidesPerView={1}
-                    navigation
+                    navigation={{ prevEl: ".me-prev", nextEl: ".me-next" }}
                     pagination={{ clickable: true }}
                     autoplay={{
                       delay: 4000,
@@ -680,12 +699,8 @@ export default function App() {
                     }}
                     loop={true}
                     breakpoints={{
-                      640: {
-                        slidesPerView: 2,
-                      },
-                      1024: {
-                        slidesPerView: 3,
-                      },
+                      640: { slidesPerView: 2 },
+                      1024: { slidesPerView: 3 },
                     }}
                   >
                     {meImages.map((img, index) => (
@@ -765,8 +780,45 @@ export default function App() {
                   }}
                 >
                   <Box
-                    sx={{ position: "relative", width: "100%", height: "100%" }}
+                    sx={{
+                      position: "relative",
+                      width: "100%",
+                      height: "100%",
+                      "& .swiper-button-next, & .swiper-button-prev": { display: "none" },
+                    }}
                   >
+                    <IconButton
+                      className="lb-prev"
+                      sx={{
+                        position: "absolute", right: { xs: 6, md: 12 }, top: "50%",
+                        transform: "translateY(-50%)", zIndex: 10,
+                        bgcolor: "rgba(60,60,60,0.8)", color: "#fff",
+                        width: 52, height: 52,
+                        backdropFilter: "blur(6px)",
+                        boxShadow: "0 4px 20px rgba(0,0,0,0.45)",
+                        border: "1.5px solid rgba(255,255,255,0.2)",
+                        transition: "all 0.2s",
+                        "&:hover": { bgcolor: "rgba(20,20,20,0.97)", transform: "translateY(-50%) scale(1.1)" },
+                      }}
+                    >
+                      <ChevronRightIcon sx={{ fontSize: 30 }} />
+                    </IconButton>
+                    <IconButton
+                      className="lb-next"
+                      sx={{
+                        position: "absolute", left: { xs: 6, md: 12 }, top: "50%",
+                        transform: "translateY(-50%)", zIndex: 10,
+                        bgcolor: "rgba(60,60,60,0.8)", color: "#fff",
+                        width: 52, height: 52,
+                        backdropFilter: "blur(6px)",
+                        boxShadow: "0 4px 20px rgba(0,0,0,0.45)",
+                        border: "1.5px solid rgba(255,255,255,0.2)",
+                        transition: "all 0.2s",
+                        "&:hover": { bgcolor: "rgba(20,20,20,0.97)", transform: "translateY(-50%) scale(1.1)" },
+                      }}
+                    >
+                      <ChevronLeftIcon sx={{ fontSize: 30 }} />
+                    </IconButton>
                     <IconButton
                       onClick={closeLightbox}
                       sx={{
@@ -786,7 +838,7 @@ export default function App() {
                         key={`lightbox-${lightboxImages[0] || ""}-${selectedImageIndex}`}
                         modules={[Pagination, Navigation]}
                         initialSlide={selectedImageIndex}
-                        navigation
+                        navigation={{ prevEl: ".lb-prev", nextEl: ".lb-next" }}
                         pagination={{ clickable: true }}
                         allowTouchMove={true}
                         simulateTouch={true}
@@ -1226,10 +1278,8 @@ export default function App() {
 
               <Box
                 sx={{
-                  "& .swiper": {
-                    pb: 6,
-                    px: 2, // Add some padding to container so arrows don't touch edges
-                  },
+                  position: "relative",
+                  "& .swiper": { pb: 6, px: { xs: 5, md: 7 } },
                   "& .swiper-pagination-bullet": {
                     bgcolor: "primary.main",
                     opacity: 0.4,
@@ -1239,33 +1289,46 @@ export default function App() {
                       transform: "scale(1.2)",
                     },
                   },
-                  "& .swiper-button-next, & .swiper-button-prev": {
-                    color: "primary.main",
-                    bgcolor: "transparent",
-                    transition: "all 0.3s ease",
-                    "--swiper-navigation-size": "32px",
-                    "&:after": {
-                      fontSize: "32px",
-                      fontWeight: 900,
-                    },
-                    "&:hover": {
-                      color: "primary.dark",
-                      transform: "scale(1.2)",
-                    },
-                  },
-                  "& .swiper-button-next": {
-                    right: { xs: 0, md: 10 }, // Closer to edge on mobile
-                  },
-                  "& .swiper-button-prev": {
-                    left: { xs: 0, md: 10 },
-                  },
+                  "& .swiper-button-next, & .swiper-button-prev": { display: "none" },
                 }}
               >
+                <IconButton
+                  className="results-prev"
+                  sx={{
+                    position: "absolute", right: { xs: -4, md: -8 }, top: "42%",
+                    transform: "translateY(-50%)", zIndex: 10,
+                    bgcolor: "rgba(60,60,60,0.75)", color: "#fff",
+                    width: 44, height: 44,
+                    backdropFilter: "blur(4px)",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+                    border: "1.5px solid rgba(255,255,255,0.18)",
+                    transition: "all 0.2s",
+                    "&:hover": { bgcolor: "rgba(30,30,30,0.95)", transform: "translateY(-50%) scale(1.1)" },
+                  }}
+                >
+                  <ChevronRightIcon sx={{ fontSize: 26 }} />
+                </IconButton>
+                <IconButton
+                  className="results-next"
+                  sx={{
+                    position: "absolute", left: { xs: -4, md: -8 }, top: "42%",
+                    transform: "translateY(-50%)", zIndex: 10,
+                    bgcolor: "rgba(60,60,60,0.75)", color: "#fff",
+                    width: 44, height: 44,
+                    backdropFilter: "blur(4px)",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+                    border: "1.5px solid rgba(255,255,255,0.18)",
+                    transition: "all 0.2s",
+                    "&:hover": { bgcolor: "rgba(30,30,30,0.95)", transform: "translateY(-50%) scale(1.1)" },
+                  }}
+                >
+                  <ChevronLeftIcon sx={{ fontSize: 26 }} />
+                </IconButton>
                 <Swiper
                   modules={[Pagination, Navigation, Autoplay]}
                   spaceBetween={20}
                   slidesPerView={1}
-                  navigation
+                  navigation={{ prevEl: ".results-prev", nextEl: ".results-next" }}
                   pagination={{ clickable: true }}
                   autoplay={{
                     delay: 3000,
@@ -1273,12 +1336,8 @@ export default function App() {
                   }}
                   loop={true}
                   breakpoints={{
-                    640: {
-                      slidesPerView: 2,
-                    },
-                    1024: {
-                      slidesPerView: 3,
-                    },
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
                   }}
                 >
                   {resultImages.map((img, index) => (
