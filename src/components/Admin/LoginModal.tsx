@@ -29,10 +29,13 @@ interface UserCredentials {
   phone: string;
 }
 
+const ADMIN_1_EMAIL = "ronikoshelfit@gmail.com";
+const ADMIN_1_PHONE = "0543299789";
+
 const USERS: Record<string, UserCredentials> = {
-  [import.meta.env.VITE_ADMIN_1_EMAIL as string]: {
+  [ADMIN_1_EMAIL]: {
     pass: import.meta.env.VITE_ADMIN_1_PASSWORD as string,
-    phone: import.meta.env.VITE_ADMIN_1_PHONE as string,
+    phone: ADMIN_1_PHONE,
   },
   [import.meta.env.VITE_ADMIN_2_EMAIL as string]: {
     pass: import.meta.env.VITE_ADMIN_2_PASSWORD as string,

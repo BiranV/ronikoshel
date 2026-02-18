@@ -105,7 +105,8 @@ const TikTokIcon = (props: any) => (
   </SvgIcon>
 );
 
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
+const WHATSAPP_NUMBER = "972509249858";
+const ADMIN_1_EMAIL = "ronikoshelfit@gmail.com";
 
 function HideOnScroll(props: { children: React.ReactElement }) {
   const { children } = props;
@@ -194,7 +195,7 @@ export default function App() {
         if (sessionStorage.getItem("visitNotificationSent")) return;
 
         const adminEmails = [
-          import.meta.env.VITE_ADMIN_1_EMAIL,
+          ADMIN_1_EMAIL,
           // import.meta.env.VITE_ADMIN_2_EMAIL,
         ].filter(Boolean);
 
